@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+<title>editor Đoán xem</title>
+<style>
+    canvas {display: block;}
+</style>
+</head>
+<body>
+    <input type='file' id="fileUpload" />
+    <canvas id="canvas" width="500" height="700"></canvas>
+
+
+<script>
+   
+const EL = (sel) => document.querySelector(sel);
+const ctx = EL("#canvas").getContext("2d");
+
+function readImage() {
+    if (!this.files || !this.files[0]) return;
+    var imageLogo = new Image();
+    imageLogo.src = 'logo.jpg';
+    const FR = new FileReader();
+    var height = ctx.canvas.height
+    FR.addEventListener("load", (evt) => {
+    const img = new Image();
+    img.addEventListener("load", () => {
+       if(img.height < 500){
+            height = img.height;
+       }
+        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    
+        ctx.drawImage(img, 0, 0, ctx.canvas.width, height);
+        ctx.drawImage(imageLogo, 0, 0);
+
+    });
+    img.src = evt.target.result;
+});
+  FR.readAsDataURL(this.files[0]);
+  
+}
+
+EL("#fileUpload").addEventListener("change", readImage);
+
+</script>
+</body>
+</html>
