@@ -23,7 +23,7 @@ const ctx = EL("#canvas").getContext("2d");
 function readImage() {
     if (!this.files || !this.files[0]) return;
     var imageLogo = new Image();
-    imageLogo.src = 'logo Hi-Blue.png';
+    imageLogo.src = 'logo.png';
     const FR = new FileReader();
     var height = ctx.canvas.height
     FR.addEventListener("load", (evt) => {
